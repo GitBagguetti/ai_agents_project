@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: "Teaching Large Language Models how to Code"
+abstract: >
+  A multi-stage pipeline that uses AutoGen multi-agent prompt engineering,
+  GRPO reinforcement learning, DSPy automated prompt optimisation, and
+  SpaCy MCP tools to teach large language models structured information
+  extraction (subject-verb relationship detection) from social-media texts.
+authors:
+  - family-names: Loertscher
+    given-names: Pierre
+    affiliation: "University of Chicago, Crown Family School / MACSS Program"
+date-released: "2026-03-13"
+url: "https://github.com/ploertscher/ai_agents_project"
+license: MIT
+keywords:
+  - large language models
+  - multi-agent systems
+  - prompt engineering
+  - reinforcement learning from human feedback
+  - DSPy
+  - AutoGen
+  - information extraction
+  - social media analysis
