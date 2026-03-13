@@ -57,6 +57,20 @@ Both notebooks are designed for **Google Colab** (GPU recommended for `llama_RL.
 3. Run cells in order. Section 0 installs all dependencies.
 4. Enter your OpenAI API key when prompted.
 
+**Section 2 – Llama worker via SGLang (optional but required for Llama baseline):**
+
+Section 2 swaps the OpenAI worker for a local **Llama-3.1-8B-Instruct** model served through [SGLang](https://github.com/sgl-project/sglang). Before running its cells:
+
+- A **HuggingFace token** with access to `meta-llama/Llama-3.1-8B-Instruct` is required. You will be prompted to enter it; it is written to `os.environ["HF_TOKEN"]` so that SGLang can download the weights.
+- SGLang is reinstalled at the start of Section 2 (`pip install --force-reinstall sglang backoff`) to pin the correct version.
+- The server is launched as a background process on **port 7501**:
+  ```
+  CUDA_VISIBLE_DEVICES=0 python -m sglang.launch_server \
+      --port 7501 --model-path meta-llama/Llama-3.1-8B-Instruct > sglang.log 2>&1 &
+  ```
+- Any existing process on port 7501 is killed automatically before launch to avoid port-conflict errors.
+- After launch, wait for the server to become ready (watch `sglang.log` via `!tail sglang.log`) before proceeding to the evaluation cells.
+
 ### `llama_RL.ipynb`
 
 1. Run on a separate Colab instance with an A100 GPU.
@@ -78,6 +92,7 @@ The dataset (`original_content_trump_motifs_en_10k.csv`) contains ~10 000 social
 pyautogen / autogen-agentchat~=0.2
 openai
 dspy-ai
+sglang + backoff          # Section 2 only – SGLang inference server for Llama
 trl
 transformers
 datasets
